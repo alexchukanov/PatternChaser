@@ -9,9 +9,9 @@ namespace PatternChaser
 {
     internal class Program
     {   
-        //static string str = "sskfssbbb9bbb"; //yes bbb
+        static string str = "sskfssbbb9bbb"; //yes bbb
         //static string str = "123224"; //no null
-        static string str = "da2kr32a2"; // incorrect result        
+        //static string str = "da2kr32a2"; // incorrect result        
 
         static void Main(string[] args)
         {
@@ -20,12 +20,12 @@ namespace PatternChaser
 
 
         public static string PatternChaser(string str)
-        {
+        { 
             string result = "no null";
 
             List<string> rptStrList = new List<string>();
-
-            var reg = new Regex(@"(.)\1{1,}");
+           
+            var reg = new Regex(@"(\w+)\1+");
 
             var s = reg.Matches(str);
 
