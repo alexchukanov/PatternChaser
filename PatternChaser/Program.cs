@@ -9,7 +9,7 @@ namespace PatternChaser
 {
     internal class Program
     {   
-        static string str = "sskfssbbb9bbb";
+        static string str = "sskfssbbb9bbb"; //yes bbb
         static void Main(string[] args)
         {
             Console.WriteLine(PatternChaser(str));
