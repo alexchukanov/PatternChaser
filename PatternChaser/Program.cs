@@ -9,7 +9,8 @@ namespace PatternChaser
 {
     internal class Program
     {   
-        static string str = "sskfssbbb9bbb"; //yes bbb
+        //static string str = "sskfssbbb9bbb"; //yes bbb
+        static string str = "123224"; //no null
         static void Main(string[] args)
         {
             Console.WriteLine(PatternChaser(str));
@@ -18,7 +19,7 @@ namespace PatternChaser
 
         public static string PatternChaser(string str)
         {
-            string result = "no";
+            string result = "no null";
 
             List<string> rptStrList = new List<string>();
 
@@ -26,7 +27,7 @@ namespace PatternChaser
 
             var s = reg.Matches(str);
 
-            if (s.Count != 0)
+            if (s.Count > 1)
             {
                 foreach (var match in reg.Matches(str))
                 {
