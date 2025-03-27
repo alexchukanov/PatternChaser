@@ -9,38 +9,52 @@ namespace PatternChaser
 {
     internal class Program
     {   
-        static string str = "sskfssbbb9bbb"; //yes bbb
-        //static string str = "123224"; //no null
-        //static string str = "da2kr32a2"; // incorrect result        
+           static string str = "sskfssbbb9bbb"; // yes bbb
+        // static string str = "123224";        // no null
+        // static string str = "da2kr32a2";     // incorrect result        
 
         static void Main(string[] args)
         {
             Console.WriteLine(PatternChaser(str));
         }
-
-
+       
         public static string PatternChaser(string str)
-        { 
+        {
+            StringBuilder sb = new StringBuilder(); 
             string result = "no null";
 
-            List<string> rptStrList = new List<string>();
-           
-            var reg = new Regex(@"(\w+)\1+");
+            Dictionary<string, int> rptDct = new Dictionary<string, int>();            
 
-            var s = reg.Matches(str);
-
-            if (s.Count > 1)
+            for (int i = 0; i < str.Length; i++)            
             {
-                foreach (var match in reg.Matches(str))
+                sb.Clear();
+
+                for (int j = i; j < str.Length; j++)
                 {
-                    rptStrList.Add(match.ToString());
+                    char charStr = str[j];
+                    sb.Append(charStr);
+
+                    string sufStr = sb.ToString();
+
+                    int ind = str.IndexOf(sufStr, j+1);
+
+                    if (ind == -1 && !rptDct.ContainsKey(sufStr))
+                    {
+                        rptDct[sufStr] = 1;
+                    }
+                    else
+                    {
+                        rptDct[sufStr] = 2;
+                    }
                 }
-
-                string patternStr = rptStrList.Distinct().OrderByDescending(w => w.Length).First();
-
-                result = $"yes {patternStr}";
             }
 
+            var pattern = rptDct.Where(x => x.Value == 2).OrderByDescending(x => x.Key.Length).FirstOrDefault().Key;
+
+            if(pattern.Length > 1)
+            {                
+                result = $"yes {pattern}";
+            }
             return result;
         }
     }
